@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>箭头函数+对象解构</title>
+</head>
+<script type="text/javascript">
+    const monster = {
+        name:"红孩儿",
+        age : 1000,
+        skill: ["红缨枪","三味真火"]
+    }
+
+    //方法形参中取出monster 的skill对象
+    //传统方法
+    function f1(monster,skill){
+        console.log("skill=",monster.skill)
+    }
+    f1(monster,monster.skill);
+
+    //箭头函数
+    let f2 = ({skill,name,age}) => {
+        console.log("skill=",skill,"name=",name,"age",age)
+    }
+    // f2传入对象monster
+    //f2 形参是{skill},所以es6的对象解构特性，
+    // 会把monster对象skill属性解构给{skill}
+    //对象解构的前提{kill}的skill和monster的skill属性一致
+    f2(monster);
+</script>
+<body>
+
+</body>
+</html>

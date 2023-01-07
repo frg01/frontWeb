@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>点击按钮 次数增加</title>
+</head>
+<body>
+<div id="app">
+    <h1>{{message}}</h1>
+    <button v-on:click="plus1">点击增加+1</button>
+    <!--这里的sum += 2 的sum是data数据池中的data-->
+    <button v-on:click="sum += 2">点击增加+2</button>
+
+    <p>你的按钮被点击了{{sum}}次</p>
+</div>
+
+
+<script src="vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",//创建的vue实例挂载到id=app的div el=element
+        data: {//data{}  表示数据池 以k-v形式 model
+            message: "Vue事件处理的案例！",
+            sum:0,
+
+        },
+        methods: {//表示是一个method属性，对应的值是对象{} 写很多的方法
+            plus1(){
+                this.sum += 1;//data与method 同一个vue对象中
+            }
+        }
+    })
+    console.log(vm);
+</script>
+
+</body>
+</html>

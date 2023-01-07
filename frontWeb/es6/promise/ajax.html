@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jquery-ajax多次请求</title>
+    <script type="text/javascript" src="script/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        //jquery发出ajax方式
+        $.ajax({
+            url:"data/monster.json",
+            success(resultData){
+                console.log("第一次ajax请求 monster 基本信息",resultData);
+                //第二次ajax请求
+                $.ajax({
+                    url:`data/monster_detail_${resultData.id}.json`,
+                    success(resultData) {
+                        console.log("第二次ajax请求 monster 基本信息",resultData);
+                    },
+                    error(err) {//出错回调函数
+                        console.log("出现异常",err);
+                    }
+                })
+            },
+            error(err){
+                console.log("出现异常",err)
+            }
+
+        })
+    </script>
+</head>
+<body>
+
+</body>
+</html>

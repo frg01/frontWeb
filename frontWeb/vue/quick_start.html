@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue快速入门</title>
+</head>
+<body>
+<!--div不是必须，也可以使用span 但一般约定将vue挂在到div下
+ div更加适合做容器，布局
+ id一般用 app
+ -->
+<div id="app">
+    <!--
+    插值表达式:{{}}
+    message来自mode的data数据池来设置
+    执行时会去data{} 数据池中匹配数据
+    如果没有匹配到  输出null
+    -->
+    <h1>欢迎您 {{message}}--{{name}}</h1>
+</div>
+<!--引入vue.js-->
+<script src="vue.js"></script>
+<script>
+    //创建vue对象
+    /**
+     *创建vue对象实例
+     *
+     */
+    let vm = new Vue({
+        el: "#app",//创建的vue实例挂载到id=app的div
+        data: {//data{}  表示数据池 以k-v形式
+            message: "Hello,vue!",
+            name: "vue的学习"
+        }
+    })
+    console.log("vm=>",vm)
+</script>
+
+</body>
+</html>

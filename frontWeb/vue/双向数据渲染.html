@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>双向数据渲染案例</title>
+</head>
+<body>
+<div id="app">
+<h1>{{message}}</h1>
+    <!--
+    v-bind是数据的单向渲染：data数据池绑定的数据变化了会影响vue
+     v-model="hobby.val"  是数据的双向渲染
+     vue关联的元素与data数据池相互影响
+    -->
+    <input type="text" v-model="hobby.val"><br/><br/>
+    <input type="text" v-bind:value="hobby.val"><br/><br/>
+    <p>你的输入的爱好是： {{hobby.val}}</p>
+</div>
+
+<script src="vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",//创建的vue实例挂载到id=app的div
+        data: {//data{}  表示数据池 以k-v形式
+            message: "Hi,输入你的爱好！",
+            hobby: {
+                val:"购物~~~",
+            }
+        }
+    })
+    console.log(vm);
+</script>
+</body>
+</html>

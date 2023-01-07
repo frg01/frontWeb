@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>演示vue绑定事件</title>
+</head>
+<body>
+<div id="app">
+    <h1>演示Vue事件绑定操作</h1>
+书名：<input type="text" v-model="message">
+    <button v-on:click="show()">点击显示输入框的内容</button>
+</div>
+
+
+<script src="vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",//创建的vue实例挂载到id=app的div
+        data: {//data{}  表示数据池 以k-v形式
+            message: "Hello,耗子精!"
+        },
+        methods:{
+            show() {
+                alert("输入的值 "+this.message);
+            }
+        }
+    })
+    console.log(vm);
+</script>
+</body>
+</html>

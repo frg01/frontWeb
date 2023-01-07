@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>单项数据渲染</title>
+</head>
+<body>
+<div id="app">
+    <h1>{{message}}</h1>
+    <!--
+    使用插值表达式引用 data数据池是在标签体内
+    如果是标签、元素的 属性上引用data数据池  不能使用插值表达式
+    需要使用v-bind 默认报红，但不影响解析
+    如果不希望看到报红引入xmlns  简写形式 只保留:
+    -->
+    <img v-bind:src="img_src" v-bind:width="img_width">
+    <img :src="img_src" :width="img_width">
+</div>
+
+<script src="vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",//创建的vue实例挂载到id=app的div
+        data: {//data{}  表示数据池 以k-v形式
+            message: "Hello,耗子精!",
+            img_src:"1.jpg",
+            img_width:"200px"
+        }
+    })
+    console.log(vm);
+</script>
+
+</body>
+</html>

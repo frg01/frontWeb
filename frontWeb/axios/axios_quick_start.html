@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Axios的应用实例</title>
+</head>
+<body>
+<div id="app">
+    <h1>{{msg}}</h1>
+    <table border="1px" width="200px">
+        <tr>
+            <td>姓名</td>
+            <td>年龄</td>
+        </tr>
+        <tr v-for="monster in monsterList">
+            <td>{{monster.name}}</td>
+            <td>{{monster.age}}</td>
+        </tr>
+    </table>
+</div>
+
+
+<script src="vue.js"></script>
+<script src="axios.min.js"></script>
+<script>
+    new Vue({
+        el:'#app',
+        data:{
+            msg:"妖怪信息列表",
+            monsterList:[]//妖怪信息数组
+        },
+        methods:{
+            list(){//发出ajax请求 获取数据
+                /* axios.get()  表示发出ajax请求
+                ()是请求的url  根据实际情况填写
+                axios发出ajax请求的基本语法axios.get(url).then(箭头函数).then(箭头函数)...catch(箭头函数)
+                可以在then()中继续ajax请求
+                如果异常进入catch箭头函数中处理
+                list在生命周期函数created() 中调用
+                 */
+                axios.get("http://localhost:63342/axios/data/response.data.json")
+                .then(responseData => {
+                    // console.log("responseData",responseData)
+                    //使用json把json对象转成一个字符串
+                    console.log("responseData的json字符串",JSON.stringify(responseData))
+                    // console.log("responseData.data",responseData.data)
+                    // console.log("responseData.data.data",responseData.data.data)
+                    console.log("responseData.data.data.item",responseData.data.data.items)
+                    //将信息数组 绑定到data数据池的monsterList 一定要看返回的数据格式和出具吃格式和需要的内容保持一致
+                    this.monsterList = responseData.data.data.items;
+                    //可以再次发出ajax请求
+                }).catch(err => {
+                    console.log("发生异常..",err);
+                })
+            }
+        },
+        created(){
+            this.list();
+        }
+    })
+</script>
+</body>
+</html>

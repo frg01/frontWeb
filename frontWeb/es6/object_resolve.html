@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对象解构</title>
+</head>
+<script type="text/javascript">
+    let monster = {name:'牛魔王',age:800};
+    //传统取出
+    console.log(monster.name,"",monster.age);
+
+    //ES6对象解构
+    //1.把monster 对象的属性一次赋值给 {name,age}，
+    // 取名要和monster对象名保持一致 顺序无所谓
+    //使用{}代表对象
+    let {name,age} = monster
+    console.log("name=",name,"age=",age);
+    // let {name,age} = {name:'牛魔王',age:800};这样也可以
+
+    //方法上使用对象解构  保证名称与对象属性保持一致
+    function f1(name,age){
+        console.log("f1-name",name,"","f1-age",age);
+    }
+    f1(monster);
+</script>
+<body>
+
+</body>
+</html>

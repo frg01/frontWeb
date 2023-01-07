@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>箭头函数的使用</title>
+</head>
+<script type="text/javascript">
+    //传统定义方式
+    var f1 = function (n) {
+        return n * 2;
+    }
+    console.log("传统=" + f1(2))
+    //es6 箭头函数
+    let f2 = (n) => {
+        return n * 2;
+    }
+    console.log("箭头函数f2() =" + f2(2))
+    let f3 = n => n * 2;
+    console.log("箭头函数简写f3() =" + f2(2))
+
+    //函数页可以传给一个变量
+    function hi(f4) {
+        console.log(f4(300));
+    }
+    hi(n => n + 100);
+    hi(n => n - 100);
+
+    //箭头函数多个形参
+    //传统
+    var f1 = function (n,m) {
+        var res = 0;
+        for (var i = n;i <= m;i++) {
+            res += i;
+        }
+        return res;
+    };
+    console.log("传统= f1" ,f1(1,10));
+
+    //es6 箭头函数
+    let f2 =  (n,m) => {
+        var res = 0;
+        for (var i = n;i <= m;i++) {
+            res += i;
+        }
+        return res;
+    };
+    console.log("es6=箭头函数f2 " ,f2(1,10));
+</script>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>生命周期与钩子函数</title>
+</head>
+<body>
+<div id="app">
+    <span id="num">{{num}}</span>
+    <button @click="num++">赞！</button>
+    <h2>{{name}}, 有{{num}}次点赞</h2>
+</div>
+
+<script src="vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",//创建的vue实例挂载到id=app的div
+        data: {//data{}  表示数据池 以k-v形式
+            name: "kristina",
+            num: 0
+        },
+        methods:{
+            show(){
+                return this.name;
+            },
+            add(){
+               this.num ++;
+            }
+        },
+        beforeCreate(){//生命周期函数-创建vue实例前
+            console.log("============beforeCreate");
+            console.log("数据模型/数据池的数据是否加载/使用[no]",this.name," ",this.num);
+            // console.log("自定义方法是否加载/使用[no]",this.show());
+            console.log("用户页面的dom是否加载/使用[yes]",document.getElementById("num"));
+            console.log("用户页面的dom是否被渲染[no]",document.getElementById("num").innerText);
+        },
+        created(){//生命周期函数-创建vue实例后
+            console.log("============created");
+            console.log("数据模型/数据池的数据是否加载/使用[yes]",this.name," ",this.num);
+            console.log("自定义方法是否加载/使用[yes]",this.show());
+            console.log("用户页面的dom是否加载/使用[yes]",document.getElementById("num"));
+            console.log("用户页面的dom是否被渲染[no]",document.getElementById("num").innerText);
+            //发出ajax请求   接收返回数据  再次去更新data数据池的数据 可看到从后端拿到的最新数据
+            // 编译内存模板解构
+            },
+        beforeMount(){//挂载前
+            console.log("============beforeMount");
+            console.log("数据模型/数据池的数据是否加载/使用[yes]",this.name," ",this.num);
+            console.log("自定义方法是否加载/使用[yes]",this.show());
+            console.log("用户页面的dom是否加载/使用[yes]",document.getElementById("num"));
+            console.log("用户页面的dom是否被渲染[no]",document.getElementById("num").innerText);
+        },
+        mounted(){//挂载后  进行渲染和内存模板dom替换页面dom后
+            console.log("============mounted");
+            console.log("数据模型/数据池的数据是否加载/使用[yes]",this.name," ",this.num);
+            console.log("自定义方法是否加载/使用[yes]",this.show());
+            console.log("用户页面的dom是否加载/使用[yes]",document.getElementById("num"));
+            console.log("用户页面的dom是否被渲染[yes]",document.getElementById("num").innerText);
+        },
+        beforeUpdate(){//数据更新前
+            console.log("============beforeUpdate");
+            console.log("数据模型/数据池的数据是否加载/使用[yes]",this.name," ",this.num);
+            console.log("自定义方法是否加载/使用[yes]",this.show());
+            console.log("用户页面的dom是否加载/使用[yes]",document.getElementById("num"));
+            console.log("用户页面的dom数据是否更新[no]",document.getElementById("num").innerText);
+            //验证数据，进行修正
+            if (this.num < 10){
+                this.num = 8;
+            }
+        },
+        updated(){//数据更新后
+            console.log("============updated");
+            console.log("数据模型/数据池的数据是否加载/使用[yes]",this.name," ",this.num);
+            console.log("自定义方法是否加载/使用[yes]",this.show());
+            console.log("用户页面的dom是否加载/使用[yes]",document.getElementById("num"));
+            console.log("用户页面的dom数据是否更新[yes]",document.getElementById("num").innerText);
+        }
+    })
+    console.log(vm);
+</script>
+</body>
+</html>

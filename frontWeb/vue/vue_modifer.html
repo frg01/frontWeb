@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+<!--v-on:submit.prevent  阻止表单默认行为-->
+<form action="http://www.baidu.com" v-on:submit.prevent="onMySubmit">
+    妖怪名: <input type="text" v-model="monster.name"><br/><br/>
+    <button type="submit">注册</button>
+</form>
+    <p>服务器返回的数据{{count}}</p>
+    <button v-on:click.once="onMySubmit">只能点击一次</button>
+    <input type="text" v-model.trim="count"><br/><br/>
+</div>
+
+<script src="vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",//创建的vue实例挂载到id=app的div
+        data:{
+          monster: {//monster 对象可以动态生成
+          },
+          count:0
+        },
+        methods: {
+            onMySubmit(){
+                // console.log("自己的表单提交处理。。");
+                if (this.monster.name){//"" null undefined都是false
+                    console.log("提交表单 ",this.monster.name);
+                    //可以根据自己的业务发出ajax请求
+                    this.count =666;
+                }else{
+                    console.log("请输入名字 ");
+                }
+            }
+        }
+    })
+    console.log(vm);
+</script>
+</body>
+</html>

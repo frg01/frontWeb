@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jquery-ajax方式处理</title>
+    <script type="text/javascript" src="script/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $.ajax({
+            url:"data/student_100.json",
+
+            success(resultData){
+                console.log("第一次ajax请求=",resultData);
+                //开始处理第二次请求
+                $.ajax({
+                    url: `data/class_${resultData.class_id}.json`,
+                    success(resultData){
+                        console.log("2 ajax请求结果=",resultData);
+                        //开始第三次请求
+                        $.ajax({
+                            url: `data/school_${resultData.school_id}.json`,
+                            success(resultData) {
+                                console.log("3 ajax请求结果=", resultData);
+                            },
+                            error(err) {
+                                console.log("3 请求失败信息=",err);
+                            }
+                        })
+                    },
+                    error(err) {
+                        console.log("2 请求失败信息=",err);
+                    }
+                })
+            },
+            error(err){
+                console.log("1 请求失败=",err);
+            }
+        })
+    </script>
+</head>
+<body>
+
+</body>
+</html>

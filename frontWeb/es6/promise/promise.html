@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用promise完成多次ajax请求</title>
+    <script type="text/javascript" src="script/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+
+        //1.创建一个promise  传入一个箭头函数
+        // resolve,reject 参数列表
+        //成功调用resolve ，失败调用reject函数
+        //箭头函数体，任然是通过jquery发出了ajax
+        let p = new Promise((resolve,reject) => {
+            //发出ajax请求
+            $.ajax({
+                url:"data/monster.json",
+                success(resultData) {//成功的回调函数
+                    console.log("promise发出的第一次ajax请求 monster基本信息",resultData);
+                    resolve(resultData);
+                },
+                error(err){
+                    console.log("promise异步请求错误信息",err);
+                }
+            })
+        })
+
+        //继续编写请求成功后的业务  resolve(resultData);接着这个函数继续
+        p.then(resultData => {
+            // console.log("ok")
+            //继续发出请求
+            // console.log("p.then 得到的resultData",resultData);
+            return new Promise((resolve,reject) => {//返回一个新的promise
+                $.ajax({
+                    url: `data/monster_detail_${resultData.id}.json`,
+                    success(resultData){
+                        console.log("promise发出的第二次ajax请求 monster基本信息",resultData);
+                        resolve(resultData);
+                    },
+                    error(err) {//第二次ajax失败
+                        // console.log("promise第二次异步请求错误信息",err);
+                        reject(err);
+                    }
+                })
+            })
+        }).then(resultData => {
+
+            console.log("p.then().then(),resultData",resultData);
+            //可以在这里发出第三次ajax请求
+            // return new Promise((resolve,reject) => {
+            //     $.ajax({
+            //         url:,
+            //         success(resultData){
+            //             console.log();
+            //     },
+            //     error(err){
+            //
+            //     }
+            //     })
+            // })
+        }).catch(err => {//这里可以对多次ajax请求的异常进行处理
+            console.log("promise异步请求异常=",err);
+        })
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

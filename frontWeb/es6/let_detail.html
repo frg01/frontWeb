@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>let 使用 注意事项而细节</title>
+    <script type="text/javascript">
+        let name = "let的学习";
+        //衔接用,和 + 的区别，使用，可以输出对象完整信息
+        // 使用+ 是字符串拼接，回输出Object  不会输出对象的完整信息
+        console.log("name=", name);
+
+        //
+        {
+            var name = "let 的使用";
+            let job = "java工程师";
+            console.log("name" ,name);
+            console.log("job" ,job);
+        }
+        // console.log("job" ,job)不行
+        console.log("name" ,name);
+
+        //var可以声明多次，var只能声明一次（同一变量）
+        let num2 = 600;
+        // let num2 = 900;不能重复声明 改值不加let
+
+        //变量提升
+        console.log("name" ,x);//改变顺序，知道定义了变量 但赋值拿不到 是undefined
+        var x = "tom";
+
+        console.log("name" ,y);//改变顺序会报错，let不存在变量提升
+        var y = "tom";
+    </script>
+</head>
+<body>
+
+</body>
+</html>

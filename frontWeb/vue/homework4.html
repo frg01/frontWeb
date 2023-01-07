@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>演示条件判断</title>
+</head>
+<body>
+<div id="app">
+    <h1>演示条件判断</h1>
+    <!--当用户输入成绩后，判断成绩的范围并进行修正
+    事件处理 on-blur
+    -->
+    输入成绩1-100：<input type="text" v-model="grade" v-on:blur="setGrade()"><br/><br/>
+    你当前成绩是{{grade}}<br/>
+    <p v-if="grade >= 90">优秀</p>
+    <p v-else-if="grade >= 70">良好</p>
+    <p v-else-if="grade >= 60" >及格</p>
+    <p v-else-if="grade >= 0">不及格</p>
+</div>
+
+<script src="vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",//创建的vue实例挂载到id=app的div
+        data: {//data{}  表示数据池 以k-v形式
+            grade:undefined
+        },
+        methods:{
+            setGrade(){
+                if(this.grade > 100) {
+                    this.grade = 100
+                }
+                if (this.grade < 0){
+                    this.grade = 0
+                }
+            }
+
+        }
+    })
+    console.log(vm);
+</script>
+
+</body>
+</html>

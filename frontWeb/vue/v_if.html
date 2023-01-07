@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-if应用实例</title>
+</head>
+<body>
+<div id="app">
+    <h1>演示V-if绑定操作</h1>
+    <!--勾选上sel的值由默认的false变为true-->
+    <input type="checkbox" v-model="sel">是否同意条款[v-if实现]
+    <!--v-if会根据返回的值，来决定是否创建对应的子组件
+    真正的创建或者销毁子组件，动态消耗比v-show大
+    -->
+    <h1 v-if="sel">你同意条款</h1>
+    <h1 v-else>你不同意条款</h1>
+</div>
+
+
+<script src="vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",//创建的vue实例挂载到id=app的div
+        data: {//data{}  表示数据池 以k-v形式
+            sel:false
+        }
+    })
+    console.log(vm);
+</script>
+</body>
+</html>

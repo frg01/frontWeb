@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件化编程</title>
+</head>
+<body>
+
+<div id="app">
+    <h1>组件化编程-全局组件app</h1>
+    <!--引用全局组件-->
+    <counter></counter><br/>
+    <counter></counter><br/>
+    <counter></counter>
+</div>
+
+<div id="app2">
+    <h1>组件化编程-全局组件app2</h1>
+    <!--引用全局组件-->
+    <counter></counter><br/>
+    <counter></counter><br/>
+    <counter></counter>
+</div>
+
+
+<script src="vue.js"></script>
+<script>
+    //定义一个全局组件 名称为counter
+    //{}组件相关的内容
+    //template 指定该组件的界面，因为会引用到数据池的数据，所以使用模板字符串
+    //说明，要把组件视为一个Vue实例，也有自己的数据池和methods  数据独立  方法共享
+    //说明 对于组件 我们的数据池的数据  使用函数/方法返回  不能使用原来的共享方式  为了保证每个组件之间的数据独立
+    //界面通过template实现共享，业务实现共享
+    //全局组件属于说有Vue实例  因此可以在所有的vue实例中使用
+    Vue.component("counter",{
+        template:`<button v-on:click="plus1()">点击次数{{count}}次【全局组件化】</button>`,
+        data(){//返回数据  谁调用返回谁
+            return{
+                count:10
+            }
+        },
+        methods: {
+            plus1(){
+                this.count += 1
+            }
+        }
+    })
+    let vm = new Vue({
+        el: "#app",//创建的vue实例挂载到id=app的div el=element
+    })
+    let vm2 = new Vue({
+        el: "#app2",//创建的vue实例挂载到id=app的div el=element
+    })
+    console.log(vm);
+</script>
+</body>
+</html>

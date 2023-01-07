@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-for列表渲染</title>
+</head>
+<body>
+<div id="app">
+<h1>简单的列表渲染</h1>
+<ur>
+    <li v-for="i in 3">{{i}}</li>
+</ur>
+
+<h1>简单的列表渲染 -- 带索引</h1>
+<ur>
+    <li v-for="(i,index) in 3">{{i}}--{{index}}</li>
+</ur>
+<h1>遍历数据列表</h1>
+    <table width="400px" border="1px">
+        <tr v-for="(monster,index) in monsters">
+            <td>{{index}}</td>
+            <td>{{monster.id}}</td>
+            <td>{{monster.name}}</td>
+            <td>{{monster.age}}</td>
+        </tr>
+    </table>
+</div>
+
+
+<script src="vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",//创建的vue实例挂载到id=app的div
+        data: {//data{}  表示数据池 以k-v形式
+            monsters:[
+                {id:1,name:'牛魔王',age:800},
+                {id:2,name:'黑山老妖',age:900},
+                {id:1,name:'红孩儿',age:200}
+            ]
+
+        }
+    })
+    console.log(vm);
+</script>
+</body>
+</html>

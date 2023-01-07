@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>promise处理多次ajax请求</title>
+    <script type="text/javascript" src="script/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="script/promise_util.js"></script>
+    <script type="text/javascript">
+
+        get("data/student_100.json").then(resultData => {
+            //第一次处理结果
+            console.log("1 ajax请求",resultData);
+            return get(`data/class_${resultData.class_id}.json`);
+
+        }).then(resultData => {
+            //第二次处理结果
+            console.log("2 ajax请求",resultData);
+            return get(`data/school_${resultData.school_id}.json`);
+        }).then(resultData => {
+            //第三次处理结果
+            console.log("3 ajax请求",resultData);
+
+        }).catch(err => {
+            console.log("处理异常=",err);
+        })
+    </script>
+</head>
+<body>
+
+</body>
+</html>

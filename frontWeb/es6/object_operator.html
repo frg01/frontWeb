@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对象运算符的扩展</title>
+</head>
+<script type="text/javascript">
+    //cat 与cat2 指向了同一个空间，引用的指向
+    let cat = {name:"小花猫",age:20};
+    let cat2 = cat;
+    cat2.name = "大花猫";
+    console.log("cat=",cat);
+    console.log("cat2=",cat2);
+
+    //拷贝对象（深拷贝）ca
+    let cat3 = {...cat};//对象拷贝，不再指向同一个地址
+    cat3.name = "老花猫";
+    console.log("cat=",cat,"cat3=",cat3);
+    //合并对象
+    let monster = {name:"白骨精",age:100};
+    let car = {brand:"奔驰",price:20000};
+    let monster_car = {...monster,...car};//合并成一个对象
+    monster_car.name = "狐狸精";
+    console.log("monster_car",monster_car);
+    console.log("monster",monster);
+</script>
+<body>
+
+</body>
+</html>

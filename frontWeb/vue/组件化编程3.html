@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件化编程-局部组件</title>
+</head>
+<body>
+
+<div id="app">
+    <h1>组件化编程-局部组件</h1>
+    <!--引用局部组件  该组件是从挂载到app的Vue中的-->
+    <my_counter></my_counter><br/>
+    <my_counter></my_counter><br/>
+    <my_counter></my_counter><br/>
+</div>
+
+<div id="app2">
+    <h1>组件化编程-局部组件app2</h1>
+    <!--引用局部组件  该组件是从挂载到app的Vue中的-->
+    <fgr_counter></fgr_counter>fgr<br/>
+    <fgr_counter></fgr_counter>fgr<br/>
+    <fgr_counter></fgr_counter>fgr<br/>
+</div>
+
+
+<script src="vue.js"></script>
+<script>
+    //可以把常用组件  定义在某个commons.js中 export
+    //某个页面需要使用，直接import
+    const buttonCounter = {
+        template:`<button v-on:click="plus1()">点击次数{{count}}次【局部组件化】</button>`,
+        data(){//返回数据  谁调用返回谁
+            return{
+                count:10
+            }
+        },
+        methods: {
+            plus1(){
+                this.count += 1
+            }
+        }
+    }
+    let vm = new Vue({
+        el: "#app",//创建的vue实例挂载到id=app的div el=element
+        components:{//引入/注册某个组件 my_counter就是一个局部组件，它的使用范围当前的Vue中 并且只能在挂载的实例中使用
+            "my_counter":buttonCounter
+        }
+    })
+    let vm2 = new Vue({
+        el: "#app2",//创建的vue实例挂载到id=app的div el=element
+        components: {
+            'fgr_counter':buttonCounter
+        }
+    })
+    console.log(vm);
+</script>
+</body>
+</html>

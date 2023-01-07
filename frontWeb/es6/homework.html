@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5道作业题</title>
+</head>
+<script type="text/javascript">
+    //1.模板字符串显示cat的信息
+    let cat = {name:'jack',age:10};
+    console.log(`cat.name${cat.name}  cat.age${cat.age}`);
+
+    //2.输出的答案  对象解构
+    let dog = {name:'大黄',age:10};
+    let {namex,age} = dog;
+    console.log("namex=",namex," age=",age);//namex是undefined,age是10
+
+    // 3.根据给出的数据，用es6方法，构建对象，并提供方法，可以输出信息
+    const name = "周星驰";
+    const job = "演员";
+    let person = {
+        name,
+        job,
+
+        f1(){
+            console.log("person信息：name=",this.name," job=",this.job);
+        }
+    };
+    person.f1();
+
+    // 4.根据给出的数据，用es6方式，编写方法，使用对象解构的方式，
+    //得到oper和arr 并根据oper 的值，oper可以是+ — * / 来计算结果
+    var cal = {
+        oper: "/",
+        arr: [1,2,3,5]
+    }
+     function f2({oper,arr}){
+        var res = 0;
+        //考虑arr传入 的分析 是否为null length是不是<=1就直接返回第一个值
+        if ("+" == oper){
+            res = arr[1];
+            for (let i = 1;i < arr.length;i++){
+                res += arr[i]
+            }
+        }else if ("-"==oper){
+            res = arr[0];
+            for (let i = 1;i < arr.length;i++){
+                res -= arr[i]
+            }
+        }else if ("*"==oper){
+            res = arr[0];
+            for (let i = 1;i < arr.length;i++){
+                res *= arr[i]
+            }
+        }else if ("/"==oper){
+            res = arr[0];
+            for (let i = 1;i < arr.length;i++){
+                res /= arr[i]
+            }
+        }else{
+            console.log("输入的oper不正确");
+        }
+         return res;
+    }
+
+    console.log("f2()运算结果：",f2(cal));
+
+    //5.调用f8函数，arr是数组，fun 传入箭头函数，可以计算arr的和，并写出掉用方法
+    let f8 = (arr,fun) => {
+        console.log("结果=", fun(arr));
+    }
+    // let arr = [2,3,5,6]
+    // let fun = (arr) =>{
+    //     let res = 0;
+    //     for (let i = 0;i<arr.length;i++){
+    //         res += arr[i];
+    //     }
+    //     return res;
+    // }
+    // f8(arr,fun);
+
+    //简洁
+    f8([1,5,2,4],(arr) => {
+        let res = 0;
+            for (let i = 0;i<arr.length;i++){
+                res += arr[i];
+            }
+            return res;
+    })
+
+
+
+</script>
+<body>
+
+</body>
+</html>
